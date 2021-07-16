@@ -126,7 +126,7 @@ After this step, You will be able to select kernel 5.4.0-42.
    $ sudo reboot
 ```
 
-# 10. Install Ubuntu on Virtual Machine and check the result lspci at the Virtual Machine
+# 10. Install nvidia driver at the Virtual Machine
 ```
 $ lspci -nn |grep -i nvidia
 04:00.0 VGA compatible controller [0300]: NVIDIA Corporation GP107GL [Quadro P1000] [10de:1cb1] (rev a1)
