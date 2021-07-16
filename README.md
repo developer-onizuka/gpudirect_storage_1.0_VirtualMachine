@@ -66,7 +66,37 @@ $ sudo vi /etc/security/limits.conf
 $ virt-manager
 You should add the GPU and NVMe. See also attached png files.
 ```
-# 7. Install Ubuntu on Guest Machine and check the result lspci at Guest Machine
+
+# 8. You might add kernel 5.4.0-42
+See also https://kazuhira-r.hatenablog.com/entry/2020/02/28/000625
+```
+$ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
+$ sudo /etc/default/grub
+  You should edit followings, please note the GRUB_TIMEOUT_STYLE and GRUB_TIMEOUT parameters are comment out:
+```
+```
+#GRUB_TIMEOUT_STYLE=hidden
+#GRUB_TIMEOUT=0
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=off"
+```
+```
+$ sudo /etc/update-grub
+$ reboot
+
+After this step, You will be able to select kernel 5.4.0-42.
+```
+
+# 9. Install MOFED5.3 at Guest Machine
+```
+ Download MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz.
+   $ sudo apt-get install python3-distutils
+   $ cd MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64/
+   $ sudo ./mlnxofedinstall --with-nfsrdma --with-nvmf --enable-gds --add-kernel-support
+   $ sudo update-initramfs -u -k `uname -r`
+   $ sudo reboot
+```
+
+# 10. Install Ubuntu on Guest Machine and check the result lspci at Guest Machine
 ```
 $ lspci -nn |grep -i nvidia
 04:00.0 VGA compatible controller [0300]: NVIDIA Corporation GP107GL [Quadro P1000] [10de:1cb1] (rev a1)
@@ -77,9 +107,9 @@ $ reboot
 $ nvidia-smi 
 Unable to determine the device handle for GPU 0000:04:00.0: Unknown Error
 ```
-# 8. Measures for "Unable to determine the device handle for GPU 0000:0x:00.0: Unknown Error" at Host Machine
+# 11. Measures for "Unable to determine the device handle for GPU 0000:0x:00.0: Unknown Error" at Host Machine
 ```
-$ virsh edit ubuntu20.04
+$ virsh edit ubuntu20.04-gpu
 
 Select an editor.  To change later, run 'select-editor'.
   1. /bin/nano        <---- easiest
@@ -128,140 +158,4 @@ Sun Jul 11 20:12:05 2021
 |    0   N/A  N/A      1268      G   /usr/lib/xorg/Xorg                  4MiB |
 +-----------------------------------------------------------------------------+
 ```
-# 9. Additional tests at Guest Machine
-you might be able to do below after "sudo apt-get install freeglut3-dev libglu1-mesa-dev".
-```
-vm01:/usr/local/cuda/samples/bin/x86_64/linux/release$ pwd
-/usr/local/cuda/samples/bin/x86_64/linux/release
 
-vm01:/usr/local/cuda/samples/1_Utilities/bandwidthTest$ sudo make
-/usr/local/cuda-11.4/bin/nvcc -ccbin g++ -I../../common/inc  -m64    --threads 0 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_86,code=compute_86 -o bandwidthTest.o -c bandwidthTest.cu
-nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-11.4/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_86,code=compute_86 -o bandwidthTest bandwidthTest.o 
-nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
-
-vm01:/usr/local/cuda/samples/bin/x86_64/linux/release$ ./bandwidthTest 
-[CUDA Bandwidth Test] - Starting...
-Running on...
-
- Device 0: Quadro P1000
- Quick Mode
-
- Host to Device Bandwidth, 1 Device(s)
- PINNED Memory Transfers
-   Transfer Size (Bytes)	Bandwidth(GB/s)
-   32000000			12.8
-
- Device to Host Bandwidth, 1 Device(s)
- PINNED Memory Transfers
-   Transfer Size (Bytes)	Bandwidth(GB/s)
-   32000000			13.0
-
- Device to Device Bandwidth, 1 Device(s)
- PINNED Memory Transfers
-   Transfer Size (Bytes)	Bandwidth(GB/s)
-   32000000			69.4
-
-Result = PASS
-
-NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
-```
-```
-vm01:/usr/local/cuda/samples/1_Utilities/deviceQuery$ sudo make
-/usr/local/cuda-11.4/bin/nvcc -ccbin g++ -I../../common/inc  -m64    --threads 0 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_86,code=compute_86 -o deviceQuery.o -c deviceQuery.cpp
-nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-11.4/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_86,code=compute_86 -o deviceQuery deviceQuery.o 
-nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-mkdir -p ../../bin/x86_64/linux/release
-cp deviceQuery ../../bin/x86_64/linux/release
-
-vm01:/usr/local/cuda/samples/bin/x86_64/linux/release$ ./deviceQuery 
-./deviceQuery Starting...
-
- CUDA Device Query (Runtime API) version (CUDART static linking)
-
-Detected 1 CUDA Capable device(s)
-
-Device 0: "Quadro P1000"
-  CUDA Driver Version / Runtime Version          11.4 / 11.4
-  CUDA Capability Major/Minor version number:    6.1
-  Total amount of global memory:                 4040 MBytes (4236312576 bytes)
-  (005) Multiprocessors, (128) CUDA Cores/MP:    640 CUDA Cores
-  GPU Max Clock rate:                            1481 MHz (1.48 GHz)
-  Memory Clock rate:                             2505 Mhz
-  Memory Bus Width:                              128-bit
-  L2 Cache Size:                                 1048576 bytes
-  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
-  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
-  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
-  Total amount of constant memory:               65536 bytes
-  Total amount of shared memory per block:       49152 bytes
-  Total shared memory per multiprocessor:        98304 bytes
-  Total number of registers available per block: 65536
-  Warp size:                                     32
-  Maximum number of threads per multiprocessor:  2048
-  Maximum number of threads per block:           1024
-  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
-  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
-  Maximum memory pitch:                          2147483647 bytes
-  Texture alignment:                             512 bytes
-  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
-  Run time limit on kernels:                     Yes
-  Integrated GPU sharing Host Memory:            No
-  Support host page-locked memory mapping:       Yes
-  Alignment requirement for Surfaces:            Yes
-  Device has ECC support:                        Disabled
-  Device supports Unified Addressing (UVA):      Yes
-  Device supports Managed Memory:                Yes
-  Device supports Compute Preemption:            Yes
-  Supports Cooperative Kernel Launch:            Yes
-  Supports MultiDevice Co-op Kernel Launch:      Yes
-  Device PCI Domain ID / Bus ID / location ID:   0 / 4 / 0
-  Compute Mode:
-     < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
-
-deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
-Result = PASS
-```
-
-# 10. Remove Swapfile (Optional)
-```
-$ sudo swapoff -v /swapfile
-$ sudo vi /etc/fstab 
- comment out the line below:
- "/swapfile swap swap defaults 0 0"
-$ sudo rm /swapfile
-```
-
-# 11. GPU testing
-```
-  $ sudo apt install nvidia-cuda-toolkit
-  $ sudo apt install libssl-dev
-  $ git clone https://github.com/developer-onizuka/vector.git
-  $ ./gcc.sh
-  $ time ./double_sqrt.co 134217728 |tail -n 5
-  output:    5.000
-  output:    5.000
-  output:    5.000
-  output:    5.000
-  output:    5.000
-
-  real	  0m38.429s
-  user	  0m22.688s
-  sys	  0m7.435s
-
-  $ od -F -Ad  double_a.bin 
-  0000000                        3                        3
-  *
-  1073741824
-  $ od -F -Ad  double_b.bin 
-  0000000                        4                        4
-  *
-  1073741824
-  $ od -F -Ad  double_c.bin 
-  0000000                        5                        5
-  *
-  1073741824
-```
