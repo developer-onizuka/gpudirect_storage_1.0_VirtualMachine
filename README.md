@@ -67,7 +67,7 @@ $ virt-manager
 You should add the GPU and NVMe. See also attached png files.
 ```
 
-# 8. You might add kernel 5.4.0-42
+# 8. You might add kernel 5.4.0-42 at Virtual Machine
 See also https://kazuhira-r.hatenablog.com/entry/2020/02/28/000625
 ```
 $ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
@@ -86,7 +86,7 @@ $ reboot
 After this step, You will be able to select kernel 5.4.0-42.
 ```
 
-# 9. Install MOFED5.3 at Guest Machine
+# 9. Install MOFED5.3 at Virtual Machine
 ```
  Download MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz.
    $ sudo apt-get install python3-distutils
@@ -96,7 +96,7 @@ After this step, You will be able to select kernel 5.4.0-42.
    $ sudo reboot
 ```
 
-# 10. Install Ubuntu on Guest Machine and check the result lspci at Guest Machine
+# 10. Install Ubuntu on Guest Machine and check the result lspci at Virtual Machine
 ```
 $ lspci -nn |grep -i nvidia
 04:00.0 VGA compatible controller [0300]: NVIDIA Corporation GP107GL [Quadro P1000] [10de:1cb1] (rev a1)
@@ -134,6 +134,7 @@ Adding the followings:
   </features>
 ・・・
 ```
+Login to the Vritual Machine and do nvidia-smi.
 ```
 $ nvidia-smi
 Sun Jul 11 20:12:05 2021       
@@ -158,7 +159,7 @@ Sun Jul 11 20:12:05 2021
 |    0   N/A  N/A      1268      G   /usr/lib/xorg/Xorg                  4MiB |
 +-----------------------------------------------------------------------------+
 ```
-# 12. nstall CUDA-11.4 at the Guest Machine
+# 12. Install CUDA-11.4 at the Virtual Machine
 ```
    $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
    $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -168,7 +169,7 @@ Sun Jul 11 20:12:05 2021
    $ sudo apt-get update
    $ sudo apt-get -y install cuda
 ```
-# 13. Install GDS at the Guest Machine
+# 13. Install GDS at the Virtual Machine
 ```
    $ sudo apt-get update
    $ sudo apt install nvidia-gds
@@ -229,7 +230,7 @@ Sun Jul 11 20:12:05 2021
     Platform verification succeeded
 ```
 
-# 14. Througput test at Guest Machine
+# 14. Througput test at Virtual Machine
 ```
 1. preparation about NVMe SSD
    (1) mount nvme as "ordered" mode.
