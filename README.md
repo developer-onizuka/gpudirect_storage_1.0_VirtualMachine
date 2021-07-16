@@ -124,7 +124,7 @@ After this step, You will be able to select kernel 5.4.0-42.
    $ sudo reboot
 ```
 
-# 10. Install Ubuntu on Guest Machine and check the result lspci at Virtual Machine
+# 10. Install Ubuntu on Virtual Machine and check the result lspci at the Virtual Machine
 ```
 $ lspci -nn |grep -i nvidia
 04:00.0 VGA compatible controller [0300]: NVIDIA Corporation GP107GL [Quadro P1000] [10de:1cb1] (rev a1)
@@ -187,7 +187,7 @@ Sun Jul 11 20:12:05 2021
 |    0   N/A  N/A      1268      G   /usr/lib/xorg/Xorg                  4MiB |
 +-----------------------------------------------------------------------------+
 ```
-# 12. Install CUDA-11.4 at the Virtual Machine
+# 12. Install CUDA-11.4 at Virtual Machine
 ```
    $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
    $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -197,7 +197,7 @@ Sun Jul 11 20:12:05 2021
    $ sudo apt-get update
    $ sudo apt-get -y install cuda
 ```
-# 13. Install GDS at the Virtual Machine
+# 13. Install GDS at Virtual Machine
 ```
    $ sudo apt-get update
    $ sudo apt install nvidia-gds
