@@ -18,7 +18,7 @@
        HMA81GU6AFR8N-UH
    (5) NVMe SSD ... JPY 2,999
        SM961 Series MZ-VLW1280 128GB M.2 Type2280 PCIe3x4 NVMe 
-       p/N: MZVLW128HEGR-000L1
+       P/N: MZVLW128HEGR-000L1
        Performance Spec: Read 2800MB/s, Write 600MB/s
    (6) ETC
        -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
@@ -258,7 +258,7 @@ Sun Jul 11 20:12:05 2021
     Platform verification succeeded
 ```
 
-# 14. Througput test at Virtual Machine
+# 14. Throughput test at Virtual Machine
 ```
 1. preparation about NVMe SSD
    (1) mount nvme as "ordered" mode.
