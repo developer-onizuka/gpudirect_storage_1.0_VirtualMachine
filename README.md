@@ -26,7 +26,7 @@
    (7) NVIDIA Quadro P1000 ... JPY 15,800
 ```
 
-# 1. Install Ubuntu-20.4 on Host Machine
+# 1. Install Ubuntu-20.04 on Host Machine
 
 # 2. Check GPU's bus id at Host Machine
 ```
@@ -41,6 +41,7 @@ $ lspci -nn |grep -i nvme
 ```
 
 # 4. Edit /etc/default/grub at Host Machine
+You should use the id above as the parameters of vfio-pci.ids.
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX="quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804"
@@ -51,6 +52,7 @@ sudo update-grub
 sudo reboot
 ```
 # 6. Check VFIO at Host Machine
+You can find the Kernel driver replaced by "vfio-pci".
 ```
 [    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-5.8.0-59-generic root=UUID=33af4bcd-d3f9-4e6f-9ddd-5d6b2d02c044 ro quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804 quiet splash vt.handoff=7
 [    0.046801] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.8.0-59-generic root=UUID=33af4bcd-d3f9-4e6f-9ddd-5d6b2d02c044 ro quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804 quiet splash vt.handoff=7
@@ -92,7 +94,7 @@ $ sudo vi /etc/security/limits.conf
 ```
 ```
 $ virt-manager
-You should add the GPU and NVMe. See also attached png files.
+You should add the GPU and NVMe. See also attached png files. You can do this step only after kernel driver was replaced by "vfio-pci" in step#7. 
 ```
 
 # 8. You might add kernel 5.4.0-42 at Virtual Machine
@@ -100,7 +102,7 @@ See also https://kazuhira-r.hatenablog.com/entry/2020/02/28/000625
 ```
 $ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
 $ sudo /etc/default/grub
-  You should edit followings, please note the GRUB_TIMEOUT_STYLE and GRUB_TIMEOUT parameters are comment out:
+  You should edit as followings, please note the GRUB_TIMEOUT_STYLE and GRUB_TIMEOUT parameters are comment out:
 ```
 ```
 #GRUB_TIMEOUT_STYLE=hidden
