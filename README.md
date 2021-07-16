@@ -1,3 +1,31 @@
+# 0. Hardware
+```
+   (1) Optiplex 5050SFF  ... JPY 29,150
+       Intel(R) Core(TM) i3-7500 CPU @ 3.50GHz
+       DIMM slot1: DDR4 DIMM 8GB (Micron)
+       DIMM slot2: Empty
+       DIMM slot3: Empty
+       DIMM slot4: Empty
+       HDD 500GB  ---> Windows10 pro
+       DVD DRIVE  ---> replace to SATA SSD(Ubuntu 20.04)
+   (2) SATA SSD  ... JPY 2,111
+       HYUNDAI SSD 120GB
+       P/N: C2S3T/120G
+   (3) DDR4 DIMM 8GB x2 ... JPY 5,555
+       Micron Memory DDR4 2666MHz PC4-2400T-UA1-11
+   (4) DDR4 DIMM 8GB ... JPY 2,555
+       Hynix Memory DDR4 2400MHz PC4-19200
+       HMA81GU6AFR8N-UH
+   (5) NVMe SSD ... JPY 2,999
+       SM961 Series MZ-VLW1280 128GB M.2 Type2280 PCIe3x4 NVMe 
+       p/N: MZVLW128HEGR-000L1
+       Performance Spec: Read 2800MB/s, Write 600MB/s
+   (6) ETC
+       -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
+       -GLOTRENDS M.2 Heatsink ... JPY 650
+   (7) NVIDIA Quadro P1000 ... JPY 15,800
+```
+
 # 1. Install Ubuntu-20.4 on Host Machine
 
 # 2. Check GPU's bus id at Host Machine
