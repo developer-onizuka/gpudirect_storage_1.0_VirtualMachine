@@ -101,7 +101,7 @@ You should add the GPU and NVMe. See also attached png files. You can do this st
 See also https://kazuhira-r.hatenablog.com/entry/2020/02/28/000625
 ```
 $ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
-$ sudo /etc/default/grub
+$ sudo vi /etc/default/grub
   You should edit as followings, please note the GRUB_TIMEOUT_STYLE and GRUB_TIMEOUT parameters are comment out:
 ```
 ```
