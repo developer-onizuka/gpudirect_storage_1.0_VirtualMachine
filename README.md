@@ -304,3 +304,25 @@ $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 256K
 IoType: READ XferType: GPUD Threads: 1 DataSetSize: 17141760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.650979 GiB/sec, Avg_Latency: 147.865965 usecs ops: 66960 total_time 9.901797 secs
 
 ```
+
+The case of Hynix NVMe (Updated 2021/08/03)
+```
+   (8) NVMe SSD ... JPY 2,050
+       SK hynix BC501 NVMe Solid State Drive 128GB
+       P/N: HFM128GDJTNG-8310A
+       Performance Spec: Read 1400MB/s, Write 395MB/s
+       
+2. Seq Read Throughput
+(1) Storage->CPU
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 1 -I 0 -T 10 -i 256K
+IoType: READ XferType: CPUONLY Threads: 1 DataSetSize: 13045760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.300863 GiB/sec, Avg_Latency: 187.664973 usecs ops: 50960 total_time 9.563966 secs
+
+(2) Storage->CPU->GPU
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 2 -I 0 -T 10 -i 256K
+IoType: READ XferType: CPU_GPU Threads: 1 DataSetSize: 11765760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.210645 GiB/sec, Avg_Latency: 201.645975 usecs ops: 45960 total_time 9.268366 secs
+
+(3) Storage -> GPU (GDS)
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 256K
+IoType: READ XferType: GPUD Threads: 1 DataSetSize: 12789760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.312793 GiB/sec, Avg_Latency: 185.954123 usecs ops: 49960 total_time 9.291081 secs
+
+```
