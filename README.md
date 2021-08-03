@@ -24,6 +24,10 @@
        -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
        -GLOTRENDS M.2 Heatsink ... JPY 650
    (7) NVIDIA Quadro P1000 ... JPY 15,800
+   (8) NVMe SSD ... JPY 2,050
+       SK hynix BC501 NVMe Solid State Drive 128GB
+       P/N: HFM128GDJTNG-8310A
+       Performance Spec: Read 1400MB/s, Write 395MB/s
 ```
 
 # 1. Install Ubuntu-20.04 on Host Machine
