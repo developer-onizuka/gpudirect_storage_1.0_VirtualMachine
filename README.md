@@ -40,12 +40,26 @@ $ lspci -nn |grep -i nvme
 03:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd NVMe SSD Controller SM961/PM961 [144d:a804]
 ```
 
+The case of Hynix NVMe (Updated 2021/08/03)
+```
+$ lspci -nn |grep -i nvme
+03:00.0 Non-Volatile memory controller [0108]: SK hynix BC501 NVMe Solid State Drive 512GB [1c5c:1327]
+```
+
+
 # 4. Edit /etc/default/grub at Host Machine
 You should use the id above as the parameters of vfio-pci.ids.
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX="quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804"
+
 ```
+The case of Hynix NVMe (Updated 2021/08/03)
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX="quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,1c5c:1327"
+```
+
 # 5. Update grub and Reboot at Host Machine
 ```
 sudo update-grub
