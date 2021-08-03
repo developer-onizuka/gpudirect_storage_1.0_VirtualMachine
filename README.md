@@ -95,6 +95,16 @@ $ lspci -nnk -d 144d:a804
 	Kernel driver in use: vfio-pci
 	Kernel modules: nvme
 ```
+
+The case of Hynix NVMe (Updated 2021/08/03)
+```
+$ lspci -nnk -d 1c5c:1327
+03:00.0 Non-Volatile memory controller [0108]: SK hynix BC501 NVMe Solid State Drive 512GB [1c5c:1327]
+	Subsystem: SK hynix BC501 NVMe Solid State Drive 512GB [1c5c:0000]
+	Kernel driver in use: vfio-pci
+	Kernel modules: nvme
+```
+
 # 7. Install KVM on Host Machine
 ```
 $ sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
