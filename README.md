@@ -331,7 +331,7 @@ IoType: READ XferType: GPUD Threads: 1 DataSetSize: 12789760/10485760(KiB) IOSiz
 
 ```
 
-# 15. Update CUDA 11.4.1 from 11.4 (Update 2021/08/04)
+# 15. Update CUDA from 11.4 to 11.4.1 which is latest version of CUDA (Update 2021/08/04)
 ```
    $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
    $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
