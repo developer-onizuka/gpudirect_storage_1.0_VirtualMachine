@@ -328,6 +328,26 @@ IoType: READ XferType: CPU_GPU Threads: 1 DataSetSize: 11765760/10485760(KiB) IO
 (3) Storage -> GPU (GDS)
 $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 256K
 IoType: READ XferType: GPUD Threads: 1 DataSetSize: 12789760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.312793 GiB/sec, Avg_Latency: 185.954123 usecs ops: 49960 total_time 9.291081 secs
+```
+
+Write the data to NVMe from GPU thru GDS was failed as following, when I used SK Hynix NVMe device. It seems to be bad when data size is above 4096B. 
+According to my result, non-GDS mode (x=1 or x=2) was fine. I am always wonder which DMA engine (GPU's DMA engine or NVMe's DMA engine) play the role of DMA between GPU mem and NVMe mem.
+```
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 1 -I 1 -T 10 -i 4096K
+IoType: WRITE XferType: CPUONLY Threads: 1 DataSetSize: 4096000/10485760(KiB) IOSize: 4096(KiB) Throughput: 0.210798 GiB/sec, Avg_Latency: 18523.702000 usecs ops: 1000 total_time 18.530790 secs
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 2 -I 1 -T 10 -i 4096K
+IoType: WRITE XferType: CPU_GPU Threads: 1 DataSetSize: 4096000/10485760(KiB) IOSize: 4096(KiB) Throughput: 0.208823 GiB/sec, Avg_Latency: 18696.396000 usecs ops: 1000 total_time 18.706036 secs
+
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 4096K
+Error: IO failed stopping traffic, fd :27 ret:-5 errno :1
+io failed :ret :-5 errno :1, file offset :0, block size  :4194304
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 1024
+IoType: WRITE XferType: GPUD Threads: 1 DataSetSize: 12000/10485760(KiB) IOSize: 1(KiB) Throughput: 0.001227 GiB/sec, Avg_Latency: 776.935000 usecs ops: 12000 total_time 9.325954 secs
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 2048
+IoType: WRITE XferType: GPUD Threads: 1 DataSetSize: 18000/10485760(KiB) IOSize: 2(KiB) Throughput: 0.001765 GiB/sec, Avg_Latency: 1080.127889 usecs ops: 9000 total_time 9.723622 secs
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 4096
+Error: IO failed stopping traffic, fd :27 ret:-5 errno :1
+io failed :ret :-5 errno :1, file offset :0, block size  :4096
 
 ```
 
