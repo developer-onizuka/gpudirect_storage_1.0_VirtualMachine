@@ -1,33 +1,33 @@
 # 0. Hardware
 ```
-   (1) Optiplex 5050SFF  ... JPY 29,150
-       Intel(R) Core(TM) i3-7500 CPU @ 3.50GHz
-       DIMM slot1: DDR4 DIMM 8GB (Micron)
-       DIMM slot2: Empty
-       DIMM slot3: Empty
-       DIMM slot4: Empty
-       HDD 500GB  ---> Windows10 pro
-       DVD DRIVE  ---> replace to SATA SSD(Ubuntu 20.04)
-   (2) SATA SSD  ... JPY 2,111
-       HYUNDAI SSD 120GB
-       P/N: C2S3T/120G
-   (3) DDR4 DIMM 8GB x2 ... JPY 5,555
-       Micron Memory DDR4 2666MHz PC4-2400T-UA1-11
-   (4) DDR4 DIMM 8GB ... JPY 2,555
-       Hynix Memory DDR4 2400MHz PC4-19200
-       HMA81GU6AFR8N-UH
-   (5) NVMe SSD ... JPY 2,999
-       SM961 Series MZ-VLW1280 128GB M.2 Type2280 PCIe3x4 NVMe 
-       P/N: MZVLW128HEGR-000L1
-       Performance Spec: Read 2800MB/s, Write 600MB/s
-   (6) ETC
-       -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
-       -GLOTRENDS M.2 Heatsink ... JPY 650
-   (7) NVIDIA Quadro P1000 ... JPY 15,800
-   (8) NVMe SSD ... JPY 2,050
-       SK hynix BC501 NVMe Solid State Drive 128GB
-       P/N: HFM128GDJTNG-8310A
-       Performance Spec: Read 1400MB/s, Write 395MB/s
+(1) Optiplex 5050SFF  ... JPY 29,150
+    Intel(R) Core(TM) i3-7500 CPU @ 3.50GHz
+    DIMM slot1: DDR4 DIMM 8GB (Micron)
+    DIMM slot2: Empty
+    DIMM slot3: Empty
+    DIMM slot4: Empty
+    HDD 500GB  ---> Windows10 pro
+    DVD DRIVE  ---> replace to SATA SSD(Ubuntu 20.04)
+(2) SATA SSD  ... JPY 2,111
+    HYUNDAI SSD 120GB
+    P/N: C2S3T/120G
+(3) DDR4 DIMM 8GB x2 ... JPY 5,555
+    Micron Memory DDR4 2666MHz PC4-2400T-UA1-11
+(4) DDR4 DIMM 8GB ... JPY 2,555
+    Hynix Memory DDR4 2400MHz PC4-19200
+    HMA81GU6AFR8N-UH
+(5) NVMe SSD ... JPY 2,999
+    SM961 Series MZ-VLW1280 128GB M.2 Type2280 PCIe3x4 NVMe 
+    P/N: MZVLW128HEGR-000L1
+    Performance Spec: Read 2800MB/s, Write 600MB/s
+(6) ETC
+    -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
+    -GLOTRENDS M.2 Heatsink ... JPY 650
+(7) NVIDIA Quadro P1000 ... JPY 15,800
+(8) NVMe SSD ... JPY 2,050
+    SK hynix BC501 NVMe Solid State Drive 128GB
+    P/N: HFM128GDJTNG-8310A
+    Performance Spec: Read 1400MB/s, Write 395MB/s
 ```
 
 # 1. Install Ubuntu-20.04 on Host Machine
@@ -146,12 +146,12 @@ After this step, You will be able to select kernel 5.4.0-42.
 
 # 9. Install MOFED5.3 at Virtual Machine
 ```
- Download MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz.
-   $ sudo apt-get install python3-distutils
-   $ cd MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64/
-   $ sudo ./mlnxofedinstall --with-nfsrdma --with-nvmf --enable-gds --add-kernel-support
-   $ sudo update-initramfs -u -k `uname -r`
-   $ sudo reboot
+Download MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz.
+$ sudo apt-get install python3-distutils
+$ cd MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64/
+$ sudo ./mlnxofedinstall --with-nfsrdma --with-nvmf --enable-gds --add-kernel-support
+$ sudo update-initramfs -u -k `uname -r`
+$ sudo reboot
 ```
 
 # 10. Install nvidia driver at the Virtual Machine
@@ -219,80 +219,80 @@ Sun Jul 11 20:12:05 2021
 ```
 # 12. Install CUDA-11.4 at Virtual Machine
 ```
-   $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-   $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-   $ wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
-   $ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
-   $ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
-   $ sudo apt-get update
-   $ sudo apt-get -y install cuda
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+$ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$ wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
+$ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
+$ sudo apt-get update
+$ sudo apt-get -y install cuda
 ```
 # 13. Install GDS at Virtual Machine
 ```
-   $ sudo apt-get update
-   $ sudo apt install nvidia-gds
-   $ sudo modprobe nvidia_fs
-   $ dpkg -s nvidia-gds
-   $ /usr/local/cuda/gds/tools/gdscheck -p
-    GDS release version: 1.0.0.82
-    nvidia_fs version:  2.7 libcufile version: 2.4
-    ============
-    ENVIRONMENT:
-    ============
-    =====================
-    DRIVER CONFIGURATION:
-    =====================
-    NVMe               : Supported
-    NVMeOF             : Unsupported
-    SCSI               : Unsupported
-    ScaleFlux CSD      : Unsupported
-    NVMesh             : Unsupported
-    DDN EXAScaler      : Unsupported
-    IBM Spectrum Scale : Unsupported
-    NFS                : Unsupported
-    WekaFS             : Unsupported
-    Userspace RDMA     : Unsupported
-    --Mellanox PeerDirect : Enabled
-    --rdma library        : Not Loaded (libcufile_rdma.so)
-    --rdma devices        : Not configured
-    --rdma_device_status  : Up: 0 Down: 0
-    =====================
-    CUFILE CONFIGURATION:
-    =====================
-    properties.use_compat_mode : true
-    properties.gds_rdma_write_support : true
-    properties.use_poll_mode : false
-    properties.poll_mode_max_size_kb : 4
-    properties.max_batch_io_timeout_msecs : 5
-    properties.max_direct_io_size_kb : 16384
-    properties.max_device_cache_size_kb : 131072
-    properties.max_device_pinned_mem_size_kb : 33554432
-    properties.posix_pool_slab_size_kb : 4 1024 16384 
-    properties.posix_pool_slab_count : 128 64 32 
-    properties.rdma_peer_affinity_policy : RoundRobin
-    properties.rdma_dynamic_routing : 0
-    fs.generic.posix_unaligned_writes : false
-    fs.lustre.posix_gds_min_kb: 0
-    fs.weka.rdma_write_support: false
-    profile.nvtx : false
-    profile.cufile_stats : 0
-    miscellaneous.api_check_aggressive : false
-    =========
-    GPU INFO:
-    =========
-    GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
-    ==============
-    PLATFORM INFO:
-    ==============
-    IOMMU: disabled
-    Platform verification succeeded
+$ sudo apt-get update
+$ sudo apt install nvidia-gds
+$ sudo modprobe nvidia_fs
+$ dpkg -s nvidia-gds
+$ /usr/local/cuda/gds/tools/gdscheck -p
+GDS release version: 1.0.0.82
+nvidia_fs version:  2.7 libcufile version: 2.4
+============
+ENVIRONMENT:
+============
+=====================
+DRIVER CONFIGURATION:
+=====================
+NVMe               : Supported
+NVMeOF             : Unsupported
+SCSI               : Unsupported
+ScaleFlux CSD      : Unsupported
+NVMesh             : Unsupported
+DDN EXAScaler      : Unsupported
+IBM Spectrum Scale : Unsupported
+NFS                : Unsupported
+WekaFS             : Unsupported
+Userspace RDMA     : Unsupported
+--Mellanox PeerDirect : Enabled
+--rdma library        : Not Loaded (libcufile_rdma.so)
+--rdma devices        : Not configured
+--rdma_device_status  : Up: 0 Down: 0
+=====================
+CUFILE CONFIGURATION:
+=====================
+properties.use_compat_mode : true
+properties.gds_rdma_write_support : true
+properties.use_poll_mode : false
+properties.poll_mode_max_size_kb : 4
+properties.max_batch_io_timeout_msecs : 5
+properties.max_direct_io_size_kb : 16384
+properties.max_device_cache_size_kb : 131072
+properties.max_device_pinned_mem_size_kb : 33554432
+properties.posix_pool_slab_size_kb : 4 1024 16384 
+properties.posix_pool_slab_count : 128 64 32 
+properties.rdma_peer_affinity_policy : RoundRobin
+properties.rdma_dynamic_routing : 0
+fs.generic.posix_unaligned_writes : false
+fs.lustre.posix_gds_min_kb: 0
+fs.weka.rdma_write_support: false
+profile.nvtx : false
+profile.cufile_stats : 0
+miscellaneous.api_check_aggressive : false
+=========
+GPU INFO:
+=========
+GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
+==============
+PLATFORM INFO:
+==============
+IOMMU: disabled
+Platform verification succeeded
 ```
 
 # 14. Throughput test at Virtual Machine
 ```
 1. preparation about NVMe SSD
-   (1) mount nvme as "ordered" mode.
-   # sudo mount -t ext4 -o data=ordered /dev/nvme0n1 /mnt
+(1) mount nvme as "ordered" mode.
+# sudo mount -t ext4 -o data=ordered /dev/nvme0n1 /mnt
 
 2. Seq Read Throughput
 (1) Storage->CPU
@@ -311,10 +311,10 @@ IoType: READ XferType: GPUD Threads: 1 DataSetSize: 17141760/10485760(KiB) IOSiz
 
 The case of Hynix NVMe (Updated 2021/08/03)
 ```
-   (8) NVMe SSD ... JPY 2,050
-       SK hynix BC501 NVMe Solid State Drive 128GB
-       P/N: HFM128GDJTNG-8310A
-       Performance Spec: Read 1400MB/s, Write 395MB/s
+(8) NVMe SSD ... JPY 2,050
+    SK hynix BC501 NVMe Solid State Drive 128GB
+    P/N: HFM128GDJTNG-8310A
+    Performance Spec: Read 1400MB/s, Write 395MB/s
        
 2. Seq Read Throughput
 (1) Storage->CPU
@@ -353,92 +353,91 @@ io failed :ret :-5 errno :1, file offset :0, block size  :4096
 
 # 15. Update CUDA from 11.4 to 11.4.1 which is latest version of CUDA (Update 2021/08/04)
 ```
-   $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-   $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-   $ wget https://developer.download.nvidia.com/compute/cuda/11.4.1/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
-   $ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
-   $ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
-   $ sudo apt-get update
-   $ sudo apt-get -y install cuda
-   $ reboot
-   $ nvidia-smi
-  Wed Aug  4 14:19:31 2021       
-  +-----------------------------------------------------------------------------+
-  | NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
-  |-------------------------------+----------------------+----------------------+
-  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-  |                               |                      |               MIG M. |
-  |===============================+======================+======================|
-  |   0  Quadro P1000        On   | 00000000:04:00.0 Off |                  N/A |
-  | 34%   39C    P8    N/A /  N/A |     11MiB /  4040MiB |      0%      Default |
-  |                               |                      |                  N/A |
-  +-------------------------------+----------------------+----------------------+
-                                                                               
-  +-----------------------------------------------------------------------------+
-  | Processes:                                                                  |
-  |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-  |        ID   ID                                                   Usage      |
-  |=============================================================================|
-  |    0   N/A  N/A      1065      G   /usr/lib/xorg/Xorg                  4MiB |
-  |    0   N/A  N/A      1657      G   /usr/lib/xorg/Xorg                  4MiB |
-  +-----------------------------------------------------------------------------+
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+$ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$ wget https://developer.download.nvidia.com/compute/cuda/11.4.1/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
+$ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
+$ sudo apt-get update
+$ sudo apt-get -y install cuda
+$ reboot
+$ nvidia-smi
+Wed Aug  4 14:19:31 2021       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Quadro P1000        On   | 00000000:04:00.0 Off |                  N/A |
+| 34%   39C    P8    N/A /  N/A |     11MiB /  4040MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                             
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A      1065      G   /usr/lib/xorg/Xorg                  4MiB |
+|    0   N/A  N/A      1657      G   /usr/lib/xorg/Xorg                  4MiB |
++-----------------------------------------------------------------------------+
 
-
-   $ sudo apt install nvidia-gds
-   $ sudo modprobe nvidia_fs
-   $ dpkg -s nvidia-gds
-   $ /usr/local/cuda/gds/tools/gdscheck -p
-   GDS release version: 1.0.1.3
-   nvidia_fs version:  2.7 libcufile version: 2.4
-   ============
-   ENVIRONMENT:
-   ============
-   =====================
-   DRIVER CONFIGURATION:
-   =====================
-   NVMe               : Supported
-   NVMeOF             : Unsupported
-   SCSI               : Unsupported
-   ScaleFlux CSD      : Unsupported
-   NVMesh             : Unsupported
-   DDN EXAScaler      : Unsupported
-   IBM Spectrum Scale : Unsupported
-   NFS                : Unsupported
-   WekaFS             : Unsupported
-   Userspace RDMA     : Unsupported
-   --Mellanox PeerDirect : Enabled
-   --rdma library        : Not Loaded (libcufile_rdma.so)
-   --rdma devices        : Not configured
-   --rdma_device_status  : Up: 0 Down: 0
-   =====================
-   CUFILE CONFIGURATION:
-   =====================
-   properties.use_compat_mode : true
-   properties.gds_rdma_write_support : true
-   properties.use_poll_mode : false
-   properties.poll_mode_max_size_kb : 4
-   properties.max_batch_io_timeout_msecs : 5
-   properties.max_direct_io_size_kb : 16384
-   properties.max_device_cache_size_kb : 131072
-   properties.max_device_pinned_mem_size_kb : 33554432
-   properties.posix_pool_slab_size_kb : 4 1024 16384 
-   properties.posix_pool_slab_count : 128 64 32 
-   properties.rdma_peer_affinity_policy : RoundRobin
-   properties.rdma_dynamic_routing : 0
-   fs.generic.posix_unaligned_writes : false
-   fs.lustre.posix_gds_min_kb: 0
-   fs.weka.rdma_write_support: false
-   profile.nvtx : false
-   profile.cufile_stats : 0
-   miscellaneous.api_check_aggressive : false
-   =========
-   GPU INFO:
-   =========
-   GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
-   ==============
-   PLATFORM INFO:
-   ==============
-   IOMMU: disabled
-   Platform verification succeeded
+$ sudo apt install nvidia-gds
+$ sudo modprobe nvidia_fs
+$ dpkg -s nvidia-gds
+$ /usr/local/cuda/gds/tools/gdscheck -p
+GDS release version: 1.0.1.3
+nvidia_fs version:  2.7 libcufile version: 2.4
+============
+ENVIRONMENT:
+============
+=====================
+DRIVER CONFIGURATION:
+=====================
+NVMe               : Supported
+NVMeOF             : Unsupported
+SCSI               : Unsupported
+ScaleFlux CSD      : Unsupported
+NVMesh             : Unsupported
+DDN EXAScaler      : Unsupported
+IBM Spectrum Scale : Unsupported
+NFS                : Unsupported
+WekaFS             : Unsupported
+Userspace RDMA     : Unsupported
+--Mellanox PeerDirect : Enabled
+--rdma library        : Not Loaded (libcufile_rdma.so)
+--rdma devices        : Not configured
+--rdma_device_status  : Up: 0 Down: 0
+=====================
+CUFILE CONFIGURATION:
+=====================
+properties.use_compat_mode : true
+properties.gds_rdma_write_support : true
+properties.use_poll_mode : false
+properties.poll_mode_max_size_kb : 4
+properties.max_batch_io_timeout_msecs : 5
+properties.max_direct_io_size_kb : 16384
+properties.max_device_cache_size_kb : 131072
+properties.max_device_pinned_mem_size_kb : 33554432
+properties.posix_pool_slab_size_kb : 4 1024 16384 
+properties.posix_pool_slab_count : 128 64 32 
+properties.rdma_peer_affinity_policy : RoundRobin
+properties.rdma_dynamic_routing : 0
+fs.generic.posix_unaligned_writes : false
+fs.lustre.posix_gds_min_kb: 0
+fs.weka.rdma_write_support: false
+profile.nvtx : false
+profile.cufile_stats : 0
+miscellaneous.api_check_aggressive : false
+=========
+GPU INFO:
+=========
+GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
+==============
+PLATFORM INFO:
+==============
+IOMMU: disabled
+Platform verification succeeded
 ```
