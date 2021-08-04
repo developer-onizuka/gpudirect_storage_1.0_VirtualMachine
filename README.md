@@ -136,7 +136,7 @@ $ sudo vi /etc/default/grub
 ```
 ```
 #GRUB_TIMEOUT_STYLE=hidden
-#GRUB_TIMEOUT=0
+GRUB_TIMEOUT=-1
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=off"
 ```
 ```
