@@ -330,3 +330,95 @@ $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 256K
 IoType: READ XferType: GPUD Threads: 1 DataSetSize: 12789760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.312793 GiB/sec, Avg_Latency: 185.954123 usecs ops: 49960 total_time 9.291081 secs
 
 ```
+
+# 15. Update CUDA 11.4.1 from 11.4 (Update 2021/08/04)
+```
+   $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+   $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+   $ wget https://developer.download.nvidia.com/compute/cuda/11.4.1/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
+   $ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.1-470.57.02-1_amd64.deb
+   $ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
+   $ sudo apt-get update
+   $ sudo apt-get -y install cuda
+   $ reboot
+   $ nvidia-smi
+  Wed Aug  4 14:19:31 2021       
+  +-----------------------------------------------------------------------------+
+  | NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+  |-------------------------------+----------------------+----------------------+
+  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+  |                               |                      |               MIG M. |
+  |===============================+======================+======================|
+  |   0  Quadro P1000        On   | 00000000:04:00.0 Off |                  N/A |
+  | 34%   39C    P8    N/A /  N/A |     11MiB /  4040MiB |      0%      Default |
+  |                               |                      |                  N/A |
+  +-------------------------------+----------------------+----------------------+
+                                                                               
+  +-----------------------------------------------------------------------------+
+  | Processes:                                                                  |
+  |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+  |        ID   ID                                                   Usage      |
+  |=============================================================================|
+  |    0   N/A  N/A      1065      G   /usr/lib/xorg/Xorg                  4MiB |
+  |    0   N/A  N/A      1657      G   /usr/lib/xorg/Xorg                  4MiB |
+  +-----------------------------------------------------------------------------+
+
+
+   $ sudo apt install nvidia-gds
+   $ sudo modprobe nvidia_fs
+   $ dpkg -s nvidia-gds
+   $ /usr/local/cuda/gds/tools/gdscheck -p
+   GDS release version: 1.0.1.3
+   nvidia_fs version:  2.7 libcufile version: 2.4
+   ============
+   ENVIRONMENT:
+   ============
+   =====================
+   DRIVER CONFIGURATION:
+   =====================
+   NVMe               : Supported
+   NVMeOF             : Unsupported
+   SCSI               : Unsupported
+   ScaleFlux CSD      : Unsupported
+   NVMesh             : Unsupported
+   DDN EXAScaler      : Unsupported
+   IBM Spectrum Scale : Unsupported
+   NFS                : Unsupported
+   WekaFS             : Unsupported
+   Userspace RDMA     : Unsupported
+   --Mellanox PeerDirect : Enabled
+   --rdma library        : Not Loaded (libcufile_rdma.so)
+   --rdma devices        : Not configured
+   --rdma_device_status  : Up: 0 Down: 0
+   =====================
+   CUFILE CONFIGURATION:
+   =====================
+   properties.use_compat_mode : true
+   properties.gds_rdma_write_support : true
+   properties.use_poll_mode : false
+   properties.poll_mode_max_size_kb : 4
+   properties.max_batch_io_timeout_msecs : 5
+   properties.max_direct_io_size_kb : 16384
+   properties.max_device_cache_size_kb : 131072
+   properties.max_device_pinned_mem_size_kb : 33554432
+   properties.posix_pool_slab_size_kb : 4 1024 16384 
+   properties.posix_pool_slab_count : 128 64 32 
+   properties.rdma_peer_affinity_policy : RoundRobin
+   properties.rdma_dynamic_routing : 0
+   fs.generic.posix_unaligned_writes : false
+   fs.lustre.posix_gds_min_kb: 0
+   fs.weka.rdma_write_support: false
+   profile.nvtx : false
+   profile.cufile_stats : 0
+   miscellaneous.api_check_aggressive : false
+   =========
+   GPU INFO:
+   =========
+   GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
+   ==============
+   PLATFORM INFO:
+   ==============
+   IOMMU: disabled
+   Platform verification succeeded
+```
