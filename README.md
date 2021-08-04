@@ -234,58 +234,58 @@ $ sudo apt install nvidia-gds
 $ sudo modprobe nvidia_fs
 $ dpkg -s nvidia-gds
 $ /usr/local/cuda/gds/tools/gdscheck -p
-GDS release version: 1.0.0.82
-nvidia_fs version:  2.7 libcufile version: 2.4
-============
-ENVIRONMENT:
-============
-=====================
-DRIVER CONFIGURATION:
-=====================
-NVMe               : Supported
-NVMeOF             : Unsupported
-SCSI               : Unsupported
-ScaleFlux CSD      : Unsupported
-NVMesh             : Unsupported
-DDN EXAScaler      : Unsupported
-IBM Spectrum Scale : Unsupported
-NFS                : Unsupported
-WekaFS             : Unsupported
-Userspace RDMA     : Unsupported
---Mellanox PeerDirect : Enabled
---rdma library        : Not Loaded (libcufile_rdma.so)
---rdma devices        : Not configured
---rdma_device_status  : Up: 0 Down: 0
-=====================
-CUFILE CONFIGURATION:
-=====================
-properties.use_compat_mode : true
-properties.gds_rdma_write_support : true
-properties.use_poll_mode : false
-properties.poll_mode_max_size_kb : 4
-properties.max_batch_io_timeout_msecs : 5
-properties.max_direct_io_size_kb : 16384
-properties.max_device_cache_size_kb : 131072
-properties.max_device_pinned_mem_size_kb : 33554432
-properties.posix_pool_slab_size_kb : 4 1024 16384 
-properties.posix_pool_slab_count : 128 64 32 
-properties.rdma_peer_affinity_policy : RoundRobin
-properties.rdma_dynamic_routing : 0
-fs.generic.posix_unaligned_writes : false
-fs.lustre.posix_gds_min_kb: 0
-fs.weka.rdma_write_support: false
-profile.nvtx : false
-profile.cufile_stats : 0
-miscellaneous.api_check_aggressive : false
-=========
-GPU INFO:
-=========
-GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
-==============
-PLATFORM INFO:
-==============
-IOMMU: disabled
-Platform verification succeeded
+ GDS release version: 1.0.0.82
+ nvidia_fs version:  2.7 libcufile version: 2.4
+ ============
+ ENVIRONMENT:
+ ============
+ =====================
+ DRIVER CONFIGURATION:
+ =====================
+ NVMe               : Supported
+ NVMeOF             : Unsupported
+ SCSI               : Unsupported
+ ScaleFlux CSD      : Unsupported
+ NVMesh             : Unsupported
+ DDN EXAScaler      : Unsupported
+ IBM Spectrum Scale : Unsupported
+ NFS                : Unsupported
+ WekaFS             : Unsupported
+ Userspace RDMA     : Unsupported
+ --Mellanox PeerDirect : Enabled
+ --rdma library        : Not Loaded (libcufile_rdma.so)
+ --rdma devices        : Not configured
+ --rdma_device_status  : Up: 0 Down: 0
+ =====================
+ CUFILE CONFIGURATION:
+ =====================
+ properties.use_compat_mode : true
+ properties.gds_rdma_write_support : true
+ properties.use_poll_mode : false
+ properties.poll_mode_max_size_kb : 4
+ properties.max_batch_io_timeout_msecs : 5
+ properties.max_direct_io_size_kb : 16384
+ properties.max_device_cache_size_kb : 131072
+ properties.max_device_pinned_mem_size_kb : 33554432
+ properties.posix_pool_slab_size_kb : 4 1024 16384 
+ properties.posix_pool_slab_count : 128 64 32 
+ properties.rdma_peer_affinity_policy : RoundRobin
+ properties.rdma_dynamic_routing : 0
+ fs.generic.posix_unaligned_writes : false
+ fs.lustre.posix_gds_min_kb: 0
+ fs.weka.rdma_write_support: false
+ profile.nvtx : false
+ profile.cufile_stats : 0
+ miscellaneous.api_check_aggressive : false
+ =========
+ GPU INFO:
+ =========
+ GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
+ ==============
+ PLATFORM INFO:
+ ==============
+ IOMMU: disabled
+ Platform verification succeeded
 ```
 
 # 14. Throughput test at Virtual Machine
@@ -388,56 +388,56 @@ $ sudo apt install nvidia-gds
 $ sudo modprobe nvidia_fs
 $ dpkg -s nvidia-gds
 $ /usr/local/cuda/gds/tools/gdscheck -p
-GDS release version: 1.0.1.3
-nvidia_fs version:  2.7 libcufile version: 2.4
-============
-ENVIRONMENT:
-============
-=====================
-DRIVER CONFIGURATION:
-=====================
-NVMe               : Supported
-NVMeOF             : Unsupported
-SCSI               : Unsupported
-ScaleFlux CSD      : Unsupported
-NVMesh             : Unsupported
-DDN EXAScaler      : Unsupported
-IBM Spectrum Scale : Unsupported
-NFS                : Unsupported
-WekaFS             : Unsupported
-Userspace RDMA     : Unsupported
---Mellanox PeerDirect : Enabled
---rdma library        : Not Loaded (libcufile_rdma.so)
---rdma devices        : Not configured
---rdma_device_status  : Up: 0 Down: 0
-=====================
-CUFILE CONFIGURATION:
-=====================
-properties.use_compat_mode : true
-properties.gds_rdma_write_support : true
-properties.use_poll_mode : false
-properties.poll_mode_max_size_kb : 4
-properties.max_batch_io_timeout_msecs : 5
-properties.max_direct_io_size_kb : 16384
-properties.max_device_cache_size_kb : 131072
-properties.max_device_pinned_mem_size_kb : 33554432
-properties.posix_pool_slab_size_kb : 4 1024 16384 
-properties.posix_pool_slab_count : 128 64 32 
-properties.rdma_peer_affinity_policy : RoundRobin
-properties.rdma_dynamic_routing : 0
-fs.generic.posix_unaligned_writes : false
-fs.lustre.posix_gds_min_kb: 0
-fs.weka.rdma_write_support: false
-profile.nvtx : false
-profile.cufile_stats : 0
-miscellaneous.api_check_aggressive : false
-=========
-GPU INFO:
-=========
-GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
-==============
-PLATFORM INFO:
-==============
-IOMMU: disabled
-Platform verification succeeded
+ GDS release version: 1.0.1.3
+ nvidia_fs version:  2.7 libcufile version: 2.4
+ ============
+ ENVIRONMENT:
+ ============
+ =====================
+ DRIVER CONFIGURATION:
+ =====================
+ NVMe               : Supported
+ NVMeOF             : Unsupported
+ SCSI               : Unsupported
+ ScaleFlux CSD      : Unsupported
+ NVMesh             : Unsupported
+ DDN EXAScaler      : Unsupported
+ IBM Spectrum Scale : Unsupported
+ NFS                : Unsupported
+ WekaFS             : Unsupported
+ Userspace RDMA     : Unsupported
+ --Mellanox PeerDirect : Enabled
+ --rdma library        : Not Loaded (libcufile_rdma.so)
+ --rdma devices        : Not configured
+ --rdma_device_status  : Up: 0 Down: 0
+ =====================
+ CUFILE CONFIGURATION:
+ =====================
+ properties.use_compat_mode : true
+ properties.gds_rdma_write_support : true
+ properties.use_poll_mode : false
+ properties.poll_mode_max_size_kb : 4
+ properties.max_batch_io_timeout_msecs : 5
+ properties.max_direct_io_size_kb : 16384
+ properties.max_device_cache_size_kb : 131072
+ properties.max_device_pinned_mem_size_kb : 33554432
+ properties.posix_pool_slab_size_kb : 4 1024 16384 
+ properties.posix_pool_slab_count : 128 64 32 
+ properties.rdma_peer_affinity_policy : RoundRobin
+ properties.rdma_dynamic_routing : 0
+ fs.generic.posix_unaligned_writes : false
+ fs.lustre.posix_gds_min_kb: 0
+ fs.weka.rdma_write_support: false
+ profile.nvtx : false
+ profile.cufile_stats : 0
+ miscellaneous.api_check_aggressive : false
+ =========
+ GPU INFO:
+ =========
+ GPU index 0 Quadro P1000 bar:1 bar size (MiB):256 supports GDS
+ ==============
+ PLATFORM INFO:
+ ==============
+ IOMMU: disabled
+ Platform verification succeeded
 ```
