@@ -70,7 +70,9 @@ sudo update-grub
 sudo reboot
 ```
 # 6. Check VFIO at Host Machine
-You can find the Kernel driver replaced by "vfio-pci".
+You can find the Kernel driver replaced by "vfio-pci". 
+I could not use the NVMe Device using Silicon Motion's controller [126f:2263] as PassThrough. 
+I use the Samsung and Hynix NVMe instead of KLEVV which used Silicon Motion controller.
 ```
 [    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-5.8.0-59-generic root=UUID=33af4bcd-d3f9-4e6f-9ddd-5d6b2d02c044 ro quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804 quiet splash vt.handoff=7
 [    0.046801] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.8.0-59-generic root=UUID=33af4bcd-d3f9-4e6f-9ddd-5d6b2d02c044 ro quiet splash intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1 iommu=pt vfio-pci.ids=10de:1cb1,10de:0fb9,144d:a804 quiet splash vt.handoff=7
