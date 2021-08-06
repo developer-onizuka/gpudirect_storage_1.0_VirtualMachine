@@ -329,7 +329,7 @@ I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) p
 
 
 
-The case of Hynix NVMe (Updated 2021/08/03)
+# 14.1 The case of Hynix NVMe (Updated 2021/08/03)
 ```
 (8) NVMe SSD ... JPY 2,050
     SK hynix BC501 NVMe Solid State Drive 128GB
