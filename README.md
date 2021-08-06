@@ -312,8 +312,10 @@ IoType: READ XferType: GPUD Threads: 1 DataSetSize: 17141760/10485760(KiB) IOSiz
 
 Write the data to NVMe from GPU thru GDS was failed as following, when I used Samsung NVMe device. It seems to be bad when data size is above 4096B. 
 According to my result, non-GDS mode (x=1 or x=2) was fine. 
-# I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
-# --> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
+```
+I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
+--> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
+```
 
 ```
 $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 1024
