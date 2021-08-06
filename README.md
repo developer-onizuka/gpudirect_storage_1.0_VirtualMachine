@@ -218,7 +218,8 @@ Sun Jul 11 20:12:05 2021
 |    0   N/A  N/A       741      G   /usr/lib/xorg/Xorg                  4MiB |
 |    0   N/A  N/A      1268      G   /usr/lib/xorg/Xorg                  4MiB |
 +-----------------------------------------------------------------------------+
-```
+```# I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
+# --> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
 # 12. Install CUDA-11.4 at Virtual Machine
 ```
 $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
@@ -312,9 +313,8 @@ IoType: READ XferType: GPUD Threads: 1 DataSetSize: 17141760/10485760(KiB) IOSiz
 
 Write the data to NVMe from GPU thru GDS was failed as following, when I used Samsung NVMe device. It seems to be bad when data size is above 4096B. 
 According to my result, non-GDS mode (x=1 or x=2) was fine. 
-I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
-
---> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
+# I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
+# --> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
 
 ```
 $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 1024
@@ -348,10 +348,7 @@ $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 256K
 IoType: READ XferType: GPUD Threads: 1 DataSetSize: 12789760/10485760(KiB) IOSize: 256(KiB) Throughput: 1.312793 GiB/sec, Avg_Latency: 185.954123 usecs ops: 49960 total_time 9.291081 secs
 ```
 
-Same as Samsung NVMe. Write the data to NVMe from GPU thru GDS was failed as following, when I used SK Hynix NVMe device. It seems to be bad when data size is above 4096B. According to my result, non-GDS mode (x=1 or x=2) was fine. I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
-
---> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
-
+Same as Samsung NVMe. Write the data to NVMe from GPU thru GDS was failed as following, when I used SK Hynix NVMe device. It seems to be bad when data size is above 4096B. According to my result, non-GDS mode (x=1 or x=2) was fine. 
 ```
 $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 1 -I 1 -T 10 -i 4096K
 IoType: WRITE XferType: CPUONLY Threads: 1 DataSetSize: 4096000/10485760(KiB) IOSize: 4096(KiB) Throughput: 0.210798 GiB/sec, Avg_Latency: 18523.702000 usecs ops: 1000 total_time 18.530790 secs
