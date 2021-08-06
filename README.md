@@ -218,8 +218,7 @@ Sun Jul 11 20:12:05 2021
 |    0   N/A  N/A       741      G   /usr/lib/xorg/Xorg                  4MiB |
 |    0   N/A  N/A      1268      G   /usr/lib/xorg/Xorg                  4MiB |
 +-----------------------------------------------------------------------------+
-```# I am always wondering which DMA engine (GPU's DMA engine or NVMe's DMA engine) plays the role of DMA between GPU mem and NVMe mem.
-# --> Ans, NVMe's DMA engine (https://github.com/developer-onizuka/what_is_GPUDirect-Storage/blob/main/README.md)
+```
 # 12. Install CUDA-11.4 at Virtual Machine
 ```
 $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
