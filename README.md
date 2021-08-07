@@ -1,3 +1,7 @@
+If you want to understand what GDS is, then you can learn URL below:
+
+https://github.com/developer-onizuka/what_is_GPUDirect-Storage
+
 # 0. Hardware
 ```
 (1) Optiplex 5050SFF  ... JPY 29,150
