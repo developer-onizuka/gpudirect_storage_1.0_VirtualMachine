@@ -32,6 +32,10 @@ https://github.com/developer-onizuka/what_is_GPUDirect-Storage
     SK hynix BC501 NVMe Solid State Drive 128GB
     P/N: HFM128GDJTNG-8310A
     Performance Spec: Read 1400MB/s, Write 395MB/s
+(9) NVMe SSD ... JPY ?????
+    Phison Electronics Corporation E12 NVMe Controller 512GB
+    P/N: PS5012-E12S-512G
+    Performance Spec: Read 3400MB/s、Write 2400MB/s
 ```
 
 # 1. Install Ubuntu-20.04 on Host Machine
@@ -111,6 +115,15 @@ The case of Hynix NVMe (Updated 2021/08/03)
 $ lspci -nnk -d 1c5c:1327
 03:00.0 Non-Volatile memory controller [0108]: SK hynix BC501 NVMe Solid State Drive 512GB [1c5c:1327]
 	Subsystem: SK hynix BC501 NVMe Solid State Drive 512GB [1c5c:0000]
+	Kernel driver in use: vfio-pci
+	Kernel modules: nvme
+```
+
+The case of Phison NVMe (Updated 2021/08/29)
+```
+$ lspci -nnk -d 1987:5012
+03:00.0 Non-Volatile memory controller [0108]: Phison Electronics Corporation E12 NVMe Controller [1987:5012] (rev 01)
+	Subsystem: Phison Electronics Corporation E12 NVMe Controller [1987:5012]
 	Kernel driver in use: vfio-pci
 	Kernel modules: nvme
 ```
@@ -371,7 +384,27 @@ IoType: WRITE XferType: GPUD Threads: 1 DataSetSize: 18000/10485760(KiB) IOSize:
 $ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 1 -T 10 -i 4096
 Error: IO failed stopping traffic, fd :27 ret:-5 errno :1
 io failed :ret :-5 errno :1, file offset :0, block size  :4096
+```
 
+Phison is also same as Samsung NVMe and Write the data to NVMe from GPU thru GDS was failed. It seems to be bad when data size is above 4096B. According to my result, non-GDS mode (x=1 or x=2) was fine.  (Updated 2021/08/29)
+```
+(9) NVMe SSD ... JPY ?????
+    Phison Electronics Corporation E12 NVMe Controller 512GB
+    P/N: PS5012-E12S-512G
+    Performance Spec: Read 3400MB/s、Write 2400MB/s
+       
+2. Seq Read Throughput (4096K is better than 256KB for Phison NVMe Controller)
+(1) Storage->CPU
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 1 -I 0 -T 10 -i 4096K
+IoType: READ XferType: CPUONLY Threads: 1 DataSetSize: 25067520/10485760(KiB) IOSize: 4096(KiB) Throughput: 2.201092 GiB/sec, Avg_Latency: 1773.886275 usecs ops: 6120 total_time 10.861086 secs
+
+(2) Storage->CPU->GPU
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 2 -I 0 -T 10 -i 4096K
+IoType: READ XferType: CPU_GPU Threads: 1 DataSetSize: 20971520/10485760(KiB) IOSize: 4096(KiB) Throughput: 1.927207 GiB/sec, Avg_Latency: 2025.890430 usecs ops: 5120 total_time 10.377712 secs
+
+(3) Storage -> GPU (GDS)
+$ gdsio -f /mnt/test10G -d 0 -n 0 -w 1 -s 10G -x 0 -I 0 -T 10 -i 4096K
+IoType: READ XferType: GPUD Threads: 1 DataSetSize: 25067520/10485760(KiB) IOSize: 4096(KiB) Throughput: 2.301043 GiB/sec, Avg_Latency: 1696.841993 usecs ops: 6120 total_time 10.389311 secs
 ```
 
 # 15. Update CUDA from 11.4 to 11.4.1 which is latest version of CUDA (Update 2021/08/04)
