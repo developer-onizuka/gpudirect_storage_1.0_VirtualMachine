@@ -386,7 +386,8 @@ Error: IO failed stopping traffic, fd :27 ret:-5 errno :1
 io failed :ret :-5 errno :1, file offset :0, block size  :4096
 ```
 
-Phison is also same as Samsung NVMe and Write the data to NVMe from GPU thru GDS was failed. It seems to be bad when data size is above 4096B. According to my result, non-GDS mode (x=1 or x=2) was fine.  (Updated 2021/08/29)
+# 14.2 The case of Phison NVMe (Updated 2021/08/29)
+Phison is also same as Samsung NVMe and Write the data to NVMe from GPU thru GDS was failed. It seems to be bad when data size is above 4096B. According to my result, non-GDS mode (x=1 or x=2) was fine.
 ```
 (9) NVMe SSD ... JPY ?????
     Phison Electronics Corporation E12 NVMe Controller 512GB
