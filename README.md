@@ -28,6 +28,8 @@ https://github.com/developer-onizuka/what_is_GPUDirect-Storage
     -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
     -GLOTRENDS M.2 Heatsink ... JPY 650
 (7) NVIDIA Quadro P1000 ... JPY 15,800
+
+----- additional NVMes, see the section of #14.1 and #14.2 -----
 (8) NVMe SSD ... JPY 2,050
     SK hynix BC501 NVMe Solid State Drive 128GB
     P/N: HFM128GDJTNG-8310A
