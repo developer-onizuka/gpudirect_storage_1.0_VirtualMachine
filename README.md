@@ -41,6 +41,19 @@ https://github.com/developer-onizuka/what_is_GPUDirect-Storage
 ```
 
 # 1. Install Ubuntu-20.04 on Host Machine
+```
+   Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
+   Followings are optional, but it is very convenient.
+   $ sudo vi /etc/apt/apt.conf.d/20auto-upgrades
+     APT::Periodic::Update-Package-Lists "0";
+     APT::Periodic::Unattended-Upgrade "0";
+   $ sudo visudo
+     username ALL=NOPASSWD: ALL
+
+   See also followings:
+   https://qiita.com/RyodoTanaka/items/e9b15d579d17651650b7
+   https://thr3a.hatenablog.com/entry/20170805/1501943406
+```
 
 # 2. Check GPU's bus id at Host Machine
 ```
