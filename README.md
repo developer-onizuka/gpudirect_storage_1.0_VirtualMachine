@@ -162,6 +162,19 @@ You should add the GPU and NVMe. See also attached png files. You can do this st
 # 8. You might add kernel 5.4.0-42 at Virtual Machine
 See also https://kazuhira-r.hatenablog.com/entry/2020/02/28/000625
 ```
+   Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
+   Followings are optional, but it is very convenient.
+   $ sudo vi /etc/apt/apt.conf.d/20auto-upgrades
+     APT::Periodic::Update-Package-Lists "0";
+     APT::Periodic::Unattended-Upgrade "0";
+   $ sudo visudo
+     username ALL=NOPASSWD: ALL
+
+   See also followings:
+   https://qiita.com/RyodoTanaka/items/e9b15d579d17651650b7
+   https://thr3a.hatenablog.com/entry/20170805/1501943406
+```
+```
 $ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
 $ sudo vi /etc/default/grub
   You should edit as followings, please note the GRUB_TIMEOUT_STYLE and GRUB_TIMEOUT parameters are comment out:
