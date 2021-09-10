@@ -159,7 +159,7 @@ GRUB_TIMEOUT=-1
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=off"
 ```
 ```
-$ sudo /etc/update-grub
+$ sudo update-grub
 $ reboot
 
 After this step, You will be able to select kernel 5.4.0-42.
